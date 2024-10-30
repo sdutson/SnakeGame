@@ -22,6 +22,7 @@ pygame.display.set_caption("Snake")
 cell_size = 10
 direction = Direction.Up
 snake = [[int(screen_width/2), int(screen_height/2)]]
+snake.append([int(screen_width/2), int(screen_height/2 + 10)])
 
 # Declare game colors.
 background_color = (255, 200, 150)
@@ -67,6 +68,16 @@ while run:
 
     # Update the snake list to reflect the snake's movement.
     snake = snake[-1:] + snake[:-1] # last elm moved to front.
+    prevX = snake[1][0]
+    prevY = snake[1][1]
+    if direction == Direction.Up:
+        snake[0] = [prevX - 10, prevY]
+    elif direction == Direction.Down:
+        snake[0] = [prevX + 10, prevY]
+    elif direction == Direction.Left:
+        snake[0] = [prevX, prevY - 10]
+    else:
+        snake[0] = [prevX, prevY + 10]
 
     # Draw the snake.
     isHead = True
