@@ -1,13 +1,16 @@
+import time
+
 import pygame
 from pygame.locals import *
 from enum import Enum
 
 # Declare Direction class.
 class Direction(Enum):
-    Up = 0
-    Down = 1
-    Left = 2
-    Right = 3
+    Stagnant = 0
+    Up = 1
+    Down = 2
+    Left = 3
+    Right = 4
 
 # initialize the window.
 pygame.init()
@@ -20,9 +23,11 @@ pygame.display.set_caption("Snake")
 
 # Create the snake.
 cell_size = 10
-direction = Direction.Up
+snake_speed = 10
+direction = Direction.Stagnant
 snake = [[int(screen_width/2), int(screen_height/2)]]
 snake.append([int(screen_width/2), int(screen_height/2 + 10)])
+snake.append([int(screen_width/2), int(screen_height/2 + 20)])
 
 # Declare game colors.
 background_color = (255, 200, 150)
@@ -67,17 +72,18 @@ while run:
                 direction = Direction.Left
 
     # Update the snake list to reflect the snake's movement.
-    snake = snake[-1:] + snake[:-1] # last elm moved to front.
-    prevX = snake[1][0]
-    prevY = snake[1][1]
-    if direction == Direction.Up:
-        snake[0] = [prevX - 10, prevY]
-    elif direction == Direction.Down:
-        snake[0] = [prevX + 10, prevY]
-    elif direction == Direction.Left:
-        snake[0] = [prevX, prevY - 10]
-    else:
-        snake[0] = [prevX, prevY + 10]
+    if direction != Direction.Stagnant:
+        snake = snake[-1:] + snake[:-1] # last elm moved to front.
+        prevX = snake[1][0]
+        prevY = snake[1][1]
+        if direction == Direction.Up:
+            snake[0] = [prevX, prevY - snake_speed]
+        elif direction == Direction.Down:
+            snake[0] = [prevX, prevY + snake_speed]
+        elif direction == Direction.Left:
+            snake[0] = [prevX - snake_speed, prevY]
+        elif direction == Direction.Right:
+            snake[0] = [prevX + snake_speed, prevY]
 
     # Draw the snake.
     isHead = True
@@ -90,5 +96,7 @@ while run:
 
     # Update display.
     pygame.display.update()
+
+    time.sleep(0.04)
 
 pygame.quit()
