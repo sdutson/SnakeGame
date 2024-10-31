@@ -51,6 +51,42 @@ def draw_snake_segment(x, y, outer_color, inner_color):
     pygame.draw.rect(screen, outer_color, (x, y, cell_size, cell_size))
     pygame.draw.rect(screen, inner_color, (x + 1, y + 1, cell_size - 2, cell_size - 2))
 
+def update_head(direction, snake):
+    """
+    Updates the location of the head.
+    :param direction: The current direction of the snake.
+    :param snake: The current snake.
+    :return: void
+    """
+    prevX = snake[1][0]
+    prevY = snake[1][1]
+    if direction == Direction.Up:
+        snake[0] = [prevX, prevY - snake_speed]
+    elif direction == Direction.Down:
+        snake[0] = [prevX, prevY + snake_speed]
+    elif direction == Direction.Left:
+        snake[0] = [prevX - snake_speed, prevY]
+    elif direction == Direction.Right:
+        snake[0] = [prevX + snake_speed, prevY]
+
+def update_direction(event, direction):
+    """
+    Updates the direction of the snake.
+    :param event: The key pressed by the user.
+    :param direction: The current direction of the snake.
+    :return: The new direction of the snake.
+    """
+    if event.key == K_UP and direction != Direction.Down:
+        direction = Direction.Up
+    elif event.key == K_DOWN and direction != Direction.Up:
+        direction = Direction.Down
+    elif event.key == K_RIGHT and direction != Direction.Left:
+        direction = Direction.Right
+    elif event.key == K_LEFT and direction != Direction.Right:
+        direction = Direction.Left
+    return direction
+
+
 run = True
 while run:
 
@@ -61,29 +97,24 @@ while run:
     for event in pygame.event.get():
         if event.type == QUIT:
             run = False
+        # Arrow Key pressed, update the direction of the snake.
         elif event.type == KEYDOWN:
-            if event.key == K_UP and direction != Direction.Down:
-                direction = Direction.Up
-            elif event.key == K_DOWN and direction != Direction.Up:
-                direction = Direction.Down
-            elif event.key == K_RIGHT and direction != Direction.Left:
-                direction = Direction.Right
-            elif event.key == K_LEFT and direction != Direction.Right:
-                direction = Direction.Left
+            direction = update_direction(event, direction)
 
     # Update the snake list to reflect the snake's movement.
     if direction != Direction.Stagnant:
-        snake = snake[-1:] + snake[:-1] # last elm moved to front.
-        prevX = snake[1][0]
-        prevY = snake[1][1]
-        if direction == Direction.Up:
-            snake[0] = [prevX, prevY - snake_speed]
-        elif direction == Direction.Down:
-            snake[0] = [prevX, prevY + snake_speed]
-        elif direction == Direction.Left:
-            snake[0] = [prevX - snake_speed, prevY]
-        elif direction == Direction.Right:
-            snake[0] = [prevX + snake_speed, prevY]
+        snake = snake[-1:] + snake[:-1]  # last elm moved to front.
+        update_head(direction, snake)
+
+    # Check for collision with edge of world. If it has occurred end the game.
+    if (snake[0][0] < 0 + cell_size or snake[0][0] > screen_width - cell_size
+            or snake[0][1] < 0 + cell_size or snake[0][1] > screen_height - cell_size):
+        run = False
+
+    # Check for collision with self.
+    for i in range(1, len(snake)):
+        if snake[0][0] == snake[i][0] and snake[0][1] == snake[i][1]:
+            run = False
 
     # Draw the snake.
     isHead = True
