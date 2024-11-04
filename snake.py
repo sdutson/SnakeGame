@@ -1,4 +1,5 @@
 import time
+import random
 
 import pygame
 from pygame.locals import *
@@ -29,17 +30,25 @@ snake = [[int(screen_width/2), int(screen_height/2)]]
 snake.append([int(screen_width/2), int(screen_height/2 + 10)])
 snake.append([int(screen_width/2), int(screen_height/2 + 20)])
 
+# Create the food list.
+food_list = []
+for _ in range(3):
+    x = random.randrange(cell_size, screen_width // 10) * 10
+    y = random.randrange(cell_size, screen_height // 10) * 10
+    food_list.append([x, y])
+
 # Declare game colors.
 background_color = (255, 200, 150)
 head_color = (255, 0, 0)
 body_outer_color = (50, 255, 50)
 body_inner_color = (50, 50, 255)
+food_color = (128, 0, 128)
 
 
 def draw_screen():
     screen.fill(background_color)
 
-def draw_snake_segment(x, y, outer_color, inner_color):
+def draw_segment(x, y, outer_color, inner_color):
     """
     This function draws a snake segment of the desired color to the given coordinates on the screen.
     :param x: The x-coordinate of the snake segment.
@@ -111,7 +120,7 @@ while run:
             or snake[0][1] < 0 + cell_size or snake[0][1] > screen_height - cell_size):
         run = False
 
-    # Check for collision with self.
+    # Check for collision with self. If it has occurred, end the game.
     for i in range(1, len(snake)):
         if snake[0][0] == snake[i][0] and snake[0][1] == snake[i][1]:
             run = False
@@ -120,14 +129,18 @@ while run:
     isHead = True
     for segment in snake:
         if isHead:
-            draw_snake_segment(segment[0], segment[1], head_color, head_color)
+            draw_segment(segment[0], segment[1], head_color, head_color)
             isHead = False
         else:
-            draw_snake_segment(segment[0], segment[1], body_outer_color, body_inner_color)
+            draw_segment(segment[0], segment[1], body_outer_color, body_inner_color)
+
+    # Draw the food.
+    for food in food_list:
+        draw_segment(food[0], food[1], food_color, food_color)
 
     # Update display.
     pygame.display.update()
 
-    time.sleep(0.04)
+    time.sleep(0.1)
 
 pygame.quit()
