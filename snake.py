@@ -22,20 +22,12 @@ screen_height = 600
 screen = pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption("Snake")
 
-# Create the snake.
+# Create the snake and food list.
 cell_size = 10
 snake_speed = 10
 direction = Direction.Stagnant
 snake = [[int(screen_width/2), int(screen_height/2)]]
-snake.append([int(screen_width/2), int(screen_height/2 + 10)])
-snake.append([int(screen_width/2), int(screen_height/2 + 20)])
-
-# Create the food list.
 food_list = []
-for _ in range(3):
-    x = random.randrange(cell_size, screen_width // 10) * 10
-    y = random.randrange(cell_size, screen_height // 10) * 10
-    food_list.append([x, y])
 
 # Declare game colors.
 background_color = (255, 200, 150)
@@ -44,6 +36,28 @@ body_outer_color = (50, 255, 50)
 body_inner_color = (50, 50, 255)
 food_color = (128, 0, 128)
 
+def add_food():
+    """
+    Adds a new food object to food_list.
+    :return: void
+    """
+    x = random.randrange(cell_size, screen_width // 10) * 10
+    y = random.randrange(cell_size, screen_height // 10) * 10
+    food_list.append([x, y])
+
+def add_body_segment():
+    """
+    Adds a body segment to the snake.
+    :return: void
+    """
+    if direction == Direction.Up or direction == Direction.Stagnant:
+        snake.append([snake[-1][0], snake[-1][1] + cell_size])
+    elif direction == Direction.Down:
+        snake.append([snake[-1][0], snake[-1][1] - cell_size])
+    elif direction == Direction.Left:
+        snake.append([snake[-1][0] - cell_size, snake[-1][1]])
+    elif direction == Direction.Right:
+        snake.append([snake[-1][0] + cell_size, snake[-1][1]])
 
 def draw_screen():
     screen.fill(background_color)
@@ -96,6 +110,23 @@ def update_direction(event, direction):
     return direction
 
 
+def eat_food(index):
+    """
+    Eats the food at the given index in the food_list.
+    :param index: The index representing the food object we want to eat.
+    :return: void.
+    """
+    del food_list[index]
+    add_food()
+    add_body_segment()
+
+
+# Populate the food and snake lists.
+for _ in range(3):
+    add_food()
+    add_body_segment()
+
+
 run = True
 while run:
 
@@ -124,6 +155,12 @@ while run:
     for i in range(1, len(snake)):
         if snake[0][0] == snake[i][0] and snake[0][1] == snake[i][1]:
             run = False
+
+    # Check for collision with a food object. If it has occurred, eat the food.
+    for i in range(1, len(food_list)):
+        if snake[0][0] == food_list[i][0] and snake[0][1] == food_list[i][1]:
+            eat_food(i)
+
 
     # Draw the snake.
     isHead = True

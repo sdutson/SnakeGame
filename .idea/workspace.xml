@@ -79,7 +79,7 @@
       <workItem from="1730301139270" duration="987000" />
       <workItem from="1730302201698" duration="56000" />
       <workItem from="1730318830789" duration="3740000" />
-      <workItem from="1730754906815" duration="1024000" />
+      <workItem from="1730754906815" duration="2330000" />
     </task>
     <task id="LOCAL-00001" summary="Basic implementation.">
       <option name="closed" value="true" />
@@ -100,6 +100,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Basic implementation." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SnakeGame$snake.coverage" NAME="snake Coverage Results" MODIFIED="1730755849423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SnakeGame$snake.coverage" NAME="snake Coverage Results" MODIFIED="1730757246396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
