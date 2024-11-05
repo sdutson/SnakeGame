@@ -74,15 +74,15 @@ def draw_segment(x, y, outer_color, inner_color):
     pygame.draw.rect(screen, outer_color, (x, y, cell_size, cell_size))
     pygame.draw.rect(screen, inner_color, (x + 1, y + 1, cell_size - 2, cell_size - 2))
 
-def update_head(direction, snake):
+def update_head(direction, snake, prevX, prevY):
     """
     Updates the location of the head.
     :param direction: The current direction of the snake.
     :param snake: The current snake.
+    :param prevX: The x-coordinate of the previous head.
+    :param prevY: The y-coordinate of the previous head.
     :return: void
     """
-    prevX = snake[1][0]
-    prevY = snake[1][1]
     if direction == Direction.Up:
         snake[0] = [prevX, prevY - snake_speed]
     elif direction == Direction.Down:
@@ -140,8 +140,13 @@ while run:
 
     # Update the snake list to reflect the snake's movement.
     if direction != Direction.Stagnant:
-        snake = snake[-1:] + snake[:-1]  # last elm moved to front.
-        update_head(direction, snake)
+        if len(snake) == 1:
+            update_head(direction, snake, snake[0][0], snake[0][1])
+        else:
+            snake = snake[-1:] + snake[:-1]  # last elm moved to front.
+            prevX = snake[1][0]
+            prevY = snake[1][1]
+            update_head(direction, snake, prevX, prevY)
 
     # Check for collision with edge of world. If it has occurred end the game.
     if (snake[0][0] < 0 + cell_size or snake[0][0] > screen_width - cell_size

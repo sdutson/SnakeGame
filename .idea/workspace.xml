@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab1ab817-f188-4933-aca5-987f55d8d804" name="Changes" comment="Basic implementation.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/snake.py" beforeDir="false" afterPath="$PROJECT_DIR$/snake.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +80,7 @@
       <workItem from="1730302201698" duration="56000" />
       <workItem from="1730318830789" duration="3740000" />
       <workItem from="1730754906815" duration="2352000" />
-      <workItem from="1730768131197" duration="79000" />
+      <workItem from="1730768131197" duration="968000" />
     </task>
     <task id="LOCAL-00001" summary="Basic implementation.">
       <option name="closed" value="true" />
@@ -100,6 +101,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Basic implementation." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SnakeGame$snake.coverage" NAME="snake Coverage Results" MODIFIED="1730757246396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SnakeGame$snake.coverage" NAME="snake Coverage Results" MODIFIED="1730769061215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
