@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab1ab817-f188-4933-aca5-987f55d8d804" name="Changes" comment="Basic implementation." />
+    <list default="true" id="ab1ab817-f188-4933-aca5-987f55d8d804" name="Changes" comment="Basic implementation.">
+      <change beforePath="$PROJECT_DIR$/snake.py" beforeDir="false" afterPath="$PROJECT_DIR$/snake.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,6 +79,7 @@
       <workItem from="1730302201698" duration="56000" />
       <workItem from="1730318830789" duration="3740000" />
       <workItem from="1730754906815" duration="2352000" />
+      <workItem from="1730768131197" duration="79000" />
     </task>
     <task id="LOCAL-00001" summary="Basic implementation.">
       <option name="closed" value="true" />

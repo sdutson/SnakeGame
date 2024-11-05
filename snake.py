@@ -109,7 +109,6 @@ def update_direction(event, direction):
         direction = Direction.Left
     return direction
 
-
 def eat_food(index):
     """
     Eats the food at the given index in the food_list.
@@ -121,11 +120,9 @@ def eat_food(index):
     add_body_segment()
 
 
-# Populate the food and snake lists.
+# Populate the food list.
 for _ in range(3):
     add_food()
-    add_body_segment()
-
 
 run = True
 while run:
@@ -157,7 +154,7 @@ while run:
             run = False
 
     # Check for collision with a food object. If it has occurred, eat the food.
-    for i in range(1, len(food_list)):
+    for i in range(0, len(food_list)):
         if snake[0][0] == food_list[i][0] and snake[0][1] == food_list[i][1]:
             eat_food(i)
 
